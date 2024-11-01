@@ -4,8 +4,8 @@ A mini-project for Grinnell's CSC-207.
 
 Authors:
 
-* Your Name Here
-* Your Name Here
+* Princess Alexander
+* Sheilla Muligande
 * Samuel A. Rebelsky (Starter code)
 
 Instructions:
