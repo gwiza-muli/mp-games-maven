@@ -1,7 +1,8 @@
-package edu.grinnell.csc207.util;
+package edu.grinnell.csc207.sample;
 
 import java.util.Scanner;
 import edu.grinnell.csc207.util.MatrixV0;
+import edu.grinnell.csc207.util.WSUtils;
 
 
 public class WordSearch {
@@ -17,13 +18,14 @@ public class WordSearch {
       wordCount = scnr.nextInt();
     }
 
-    int puzzleDimensions = 7 + wordCount - 1; // MAKE SURE ALL WORDS ARE & OR FEWER
-                                              // CHARACTERS!!!!!!!
+    int puzzleDimensions = 7 + wordCount - 1; // MAKE SURE ALL WORDS ARE 7 OR FEWER // CHARACTERS!!!!!!!
     MatrixV0<Character> puzzle = new MatrixV0<>(puzzleDimensions, puzzleDimensions, null);
 
     String[] words = WSUtils.searchWords(wordCount);
     WSUtils.WSpopulator(puzzle, words);
     WSUtils.fillRandom(puzzle);
+    WSUtils.print(puzzle);
+
     WSGame(puzzle, words);
   }
 
@@ -36,7 +38,8 @@ public class WordSearch {
 
     while (true) {
       boolean wordInList = false;
-      WSUtils.print(puzzle);
+      
+      //WSUtils.print(puzzle);
       System.out.print("Enter word or 'exit'.\n");
       String userInput = scnr.nextLine().trim();
       if (userInput.equals("exit")) {
