@@ -5,7 +5,7 @@ import java.util.Random;
 public class WSUtils {
 
   // dictionary array
-   public static String[] WORDS = {"hello", "this", "needs", "to", "grow"};
+   public static String[] WORDS = {"hello", "this", "needs", "to", "grow", "hi", "good", "night"};
 
   public static String[] searchWords(int wordCount) {
     String[] WSWords = new String[wordCount];
