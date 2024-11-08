@@ -1,4 +1,5 @@
 package edu.grinnell.csc207.util;
+import java.io.PrintWriter;
 
 import java.util.Random;
 
@@ -33,10 +34,10 @@ public class WSUtils {
   /**
    * Array of words to add to the word search puzzle.
    */
-  public static String[] WORDS = {"hello", "this", "needs", "to", "grow", "hi", "good", "night"};
+  private static String[] wordsList = {"hello", "this", "needs", "to", "grow", "hi", "good", "night"};
 
   /**
-   * Selects words randomly from the WORDS array to be used in the word search.
+   * Selects words randomly from the wordsList array to be used in the word search.
    *
    * @param wordCount the number of words to include in the word search.
    * @return an array of words selected for the word search.
@@ -48,27 +49,27 @@ public class WSUtils {
       throw new IllegalArgumentException("Word count exceeds the maximum limit.");
     } //if
 
-    String[] WSWords = new String[wordCount];
+    String[] wsWords = new String[wordCount];
     Random rand = new Random();
     int words = 0;
 
     while (words < wordCount) {
-      String word = WORDS[rand.nextInt(WORDS.length)];
+      String word = wordsList[rand.nextInt(wordsList.length)];
       boolean dup = false;
 
       for (int i = 0; i < words; i++) {
-        if (WSWords[i].equals(word)) {
+        if (wsWords[i].equals(word)) {
           dup = true;
         } // for
       } // end for
 
       if (!dup) {
-        WSWords[words] = word;
+        wsWords[words] = word;
         words++;
       } // if
     } // while
 
-    return WSWords;
+    return wsWords;
   } // searchWords
 
   /**
@@ -77,7 +78,7 @@ public class WSUtils {
    * @param puzzle the empty puzzle grid to which words will be added.
    * @param words the words to be added to the puzzle.
    */
-  public static void WSpopulator(MatrixV0<Character> puzzle, String[] words) {
+  public static void wsPopulator(MatrixV0<Character> puzzle, String[] words) {
     Random rand = new Random();
 
     for (String word : words) {
@@ -101,7 +102,7 @@ public class WSUtils {
         } // if
       } // while
     } // for
-  } // WSpopulator
+  } // wsPopulator
 
   /**
    * Checks if a word can be placed in the specified location of the puzzle.
@@ -135,7 +136,7 @@ public class WSUtils {
     } else if (path == 2) { // Diagonal
       if ((col + word.length() > puzzle.width()) || (row + word.length() > puzzle.height())) {
         return false;
-      }
+      } //if
       for (int i = 0; i < word.length(); i++) {
         if (puzzle.get(row + i, col + i) != null) {
           return false;
@@ -163,18 +164,33 @@ public class WSUtils {
     } // for
   } // fillRandom
 
+  // /**
+  //  * Prints the word search puzzle.
+  //  *
+  //  * @param puzzle the word search puzzle to print.
+  //  */
+  // public static void print(MatrixV0<Character> puzzle) {
+  //   for (int i = 0; i < puzzle.height(); i++) {
+  //     for (int j = 0; j < puzzle.width(); j++) {
+  //       System.out.println(puzzle.get(i, j) + " ");
+  //     } // for
+  //     System.out.println();
+  //   } // for
+  // } // print
+
   /**
-   * Prints the word search puzzle.
+   * Prints the word search puzzle using PrintWriter.
    *
    * @param puzzle the word search puzzle to print.
+   * @param writer the PrintWriter object to handle output.
    */
-  public static void print(MatrixV0<Character> puzzle) {
+  public static void print(MatrixV0<Character> puzzle, PrintWriter writer) {
     for (int i = 0; i < puzzle.height(); i++) {
       for (int j = 0; j < puzzle.width(); j++) {
-        System.out.print(puzzle.get(i, j) + " ");
-      } // for
-      System.out.println();
-    } // for
-  } // print
+        writer.print(puzzle.get(i, j) + " "); // Using writer.print instead of System.out.println
+      } //for
+      writer.println(); // Adds a new line at the end of each row
+    } //for
+  } //print
 } // WSUtils
 
