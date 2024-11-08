@@ -97,7 +97,7 @@ public class WordSearch {
 
           // Check if all words have been found
           if (playerScore == words.length) {
-            System.out.print("Congratulations! You've found all the words!");
+            System.out.print("Congratulations! You've found all the words!\n");
             break; // Exit the game loop if all words are found
           } // if
 
