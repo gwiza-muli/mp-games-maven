@@ -4,13 +4,23 @@ import java.util.Scanner;
 import edu.grinnell.csc207.util.MatrixV0;
 import edu.grinnell.csc207.util.WSUtils;
 
-
+/**
+ * A one-player game of word search.
+ *
+ * @author Sheilla Muligande
+ * @author Princess Alexander
+ */
 public class WordSearch {
 
+  /**
+ * A sample one-player game (is that a puzzle?). Intended as a potential
+ * use of our Matrix interface.
+ *
+ * @param args command line arguments. 
+ */
   public static void main(String[] args) {
     Scanner scnr = new Scanner(System.in);
-    System.out
-        .println("Wanna play word search? enter a number between 1 to 7 for the number of words.");
+    System.out.println("Wanna play word search? enter a number between 1 to 7 for the number of words.");
 
     int wordCount = scnr.nextInt();
     while (wordCount < 1 || wordCount > 7) {
@@ -29,6 +39,13 @@ public class WordSearch {
     WSGame(puzzle, words);
   }
 
+  /**
+ * A sample one-player game (is that a puzzle?). Intended as a potential
+ * use of our Matrix interface.
+ *
+ * @param puzzle the puzzle we use as our wordsearch.
+ * @param words the words that the user will look for.
+ */
   public static void WSGame(MatrixV0<Character> puzzle, String[] words) {
     Scanner scnr = new Scanner(System.in);
     String[] playerWords = new String[words.length];
