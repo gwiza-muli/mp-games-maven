@@ -12,22 +12,18 @@ public class WSUtils {
   // dictionary array
   public static String[] WORDS = {"hello", "this", "needs", "to", "grow", "hi", "good", "night"};
 
-<<<<<<< HEAD
-
   /**
    * search words randomly picks words from our WORDS dictionary
    * which we will use as the word search words.
    * @param wordCount the number of words the user chooses.
    * @return the words we will use in the word search.
    */
-  public static String[] searchWords(int wordCount) {
-=======
    public static String[] searchWords(int wordCount) {
     // Ensure wordCount doesn't exceed MAX_WORDS
     if (wordCount > MAX_WORDS) {
         throw new IllegalArgumentException("Word count exceeds the maximum limit.");
     }
->>>>>>> 4a27a9f83319a053a5ff8986ca7aee17018dc95c
+
     String[] WSWords = new String[wordCount];
     Random rand = new Random();
     int words = 0;
