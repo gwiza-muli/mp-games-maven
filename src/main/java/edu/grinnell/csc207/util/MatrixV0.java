@@ -3,7 +3,8 @@ package edu.grinnell.csc207.util;
 /**
  * An implementation of two-dimensional matrices.
  *
- * @author Your Name Here
+ * @author Sheilla Muligande
+ * @author Princess Alexander
  * @author Samuel A. Rebelsky
  *
  * @param <T> The type of values stored in the matrix.
