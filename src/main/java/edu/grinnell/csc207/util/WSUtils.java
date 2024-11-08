@@ -2,62 +2,82 @@ package edu.grinnell.csc207.util;
 
 import java.util.Random;
 
-
 /**
- * the util methods for the word search game.
+ * Utility methods for the word search game.
+ * Provides methods for generating and populating word search puzzles.
+ *
  * @author Sheilla Muligande
  * @author Princess Alexander
  */
 public class WSUtils {
-  public static final int MAX_WORDS = 10;  // Maximum number of words in the puzzle
-  public static final int WORD_LENGTH = 5; // Word length constraint
-  public static final int MAX_ATTEMPTS = 100;  // Max number of attempts to find space for a word
-  
   /**
-   * the array of words to add to our puzzle.
+   * Maximum number of words allowed in the word search puzzle.
+   */
+  public static final int MAX_WORDS = 10;
+
+  /**
+   * The maximum length of a word that can be placed in the word search puzzle.
+   */
+  public static final int WORD_LENGTH = 5;
+
+  /**
+   * Maximum number of attempts to find space for a word in the puzzle.
+   */
+  public static final int MAX_ATTEMPTS = 100;
+
+  /**
+   * Size of the English alphabet used for generating random letters.
+   */
+  public static final int ALPHABET_SIZE = 26;
+
+  /**
+   * Array of words to add to the word search puzzle.
    */
   public static String[] WORDS = {"hello", "this", "needs", "to", "grow", "hi", "good", "night"};
 
   /**
-   * search words randomly picks words from our WORDS dictionary
-   * which we will use as the word search words.
-   * @param wordCount the number of words the user chooses.
-   * @return the words we will use in the word search.
+   * Selects words randomly from the WORDS array to be used in the word search.
+   *
+   * @param wordCount the number of words to include in the word search.
+   * @return an array of words selected for the word search.
+   * @throws IllegalArgumentException if the wordCount exceeds MAX_WORDS.
    */
-   public static String[] searchWords(int wordCount) {
+  public static String[] searchWords(int wordCount) {
     // Ensure wordCount doesn't exceed MAX_WORDS
     if (wordCount > MAX_WORDS) {
-        throw new IllegalArgumentException("Word count exceeds the maximum limit.");
-    }
+      throw new IllegalArgumentException("Word count exceeds the maximum limit.");
+    } //if
 
     String[] WSWords = new String[wordCount];
     Random rand = new Random();
     int words = 0;
 
     while (words < wordCount) {
-        String word = WORDS[rand.nextInt(WORDS.length)];
-        boolean dup = false;
-        for (int i = 0; i < words; i++) {
-            if (WSWords[i].equals(word)) {
-                dup = true;
-            }
-        }
-        if (!dup) {
-            WSWords[words] = word;
-            words++;
-        }
-    }
+      String word = WORDS[rand.nextInt(WORDS.length)];
+      boolean dup = false;
+
+      for (int i = 0; i < words; i++) {
+        if (WSWords[i].equals(word)) {
+          dup = true;
+        } // for
+      } // end for
+
+      if (!dup) {
+        WSWords[words] = word;
+        words++;
+      } // if
+    } // while
+
     return WSWords;
-}
+  } // searchWords
 
-
-/**
- * Method to add our word search words to the puzzle.
- * @param puzzle the empty puzzle to which we add the words.
- * @param words the words we add to the puzzle.
- */
+  /**
+   * Adds the selected words to the puzzle.
+   *
+   * @param puzzle the empty puzzle grid to which words will be added.
+   * @param words the words to be added to the puzzle.
+   */
   public static void WSpopulator(MatrixV0<Character> puzzle, String[] words) {
-
     Random rand = new Random();
 
     for (String word : words) {
@@ -65,99 +85,96 @@ public class WSUtils {
       while (!size) {
         int startRow = rand.nextInt(puzzle.height());
         int startCol = rand.nextInt(puzzle.width());
-
-        int path = rand.nextInt(3);
+        int path = rand.nextInt(3); // 0 = horizontal, 1 = vertical, 2 = diagonal
 
         if (lengthChecker(puzzle, word, startRow, startCol, path)) {
-
-        
-
           for (int i = 0; i < word.length(); i++) {
-            if (path == 0) { // horiz
-              puzzle.set(startRow, startCol + i, word.charAt(i));
-            } else if (path == 1) { //vertic
-              puzzle.set(startRow + i, startCol, word.charAt(i));
-            } else if (path == 2) { //diagonal
-              puzzle.set(startRow + i, startCol + i, word.charAt(i));
-            }
-          }
+            if (path == 0) {
+              puzzle.set(startRow, startCol + i, word.charAt(i)); // Horizontal placement
+            } else if (path == 1) {
+              puzzle.set(startRow + i, startCol, word.charAt(i)); // Vertical placement
+            } else if (path == 2) {
+              puzzle.set(startRow + i, startCol + i, word.charAt(i)); // Diagonal placement
+            } // if-else
+          } // for
           size = true;
-        }
-      }
-    }
-  }
+        } // if
+      } // while
+    } // for
+  } // WSpopulator
 
   /**
-   * checks if we will be misplacing a word by putting it in a certain location.
-   * @param puzzle the puzzle/word search where we are placing the word.
-   * @param word  the word we are placing into the puzzle
-   * @param row the row at which we place the first character of the word.
-   * @param col the column at which we place the first character of the word.
-   * @param path if it is going to be placed horizontally (0) vertically (2) or diagonally(3).
-   * @return true if we place that word at the specified row,column and path, without cutting it, and false otherwise.
+   * Checks if a word can be placed in the specified location of the puzzle.
+   *
+   * @param puzzle the word search grid.
+   * @param word the word to place.
+   * @param row the starting row for placement.
+   * @param col the starting column for placement.
+   * @param path the path for placement: 0 (horizontal), 1 (vertical), 2 (diagonal).
+   * @return true if the word can be placed, false otherwise.
    */
-  public static boolean lengthChecker(MatrixV0<Character> puzzle, String word, int row, int col,int path) {
-
-  //  System.out.println("does this work" + word + path); 
-
-    if (path == 0) {
+  public static boolean lengthChecker(MatrixV0<Character> puzzle, String word, int row, int col, int path) {
+    if (path == 0) { // Horizontal
       if (col + word.length() > puzzle.width()) {
         return false;
-      }
+      } //if
       for (int i = 0; i < word.length(); i++) {
         if (puzzle.get(row, col + i) != null) {
           return false;
-        }
-      }
-    } else if (path == 1) {
+        } // if
+      } // for
+    } else if (path == 1) { // Vertical
       if (row + word.length() > puzzle.height()) {
         return false;
-      }
+      } //else if
       for (int i = 0; i < word.length(); i++) {
         if (puzzle.get(row + i, col) != null) {
           return false;
-        }
-      }
-    } else if (path == 2) {
+        } // if
+      } // for
+    } else if (path == 2) { // Diagonal
       if ((col + word.length() > puzzle.width()) || (row + word.length() > puzzle.height())) {
         return false;
       }
       for (int i = 0; i < word.length(); i++) {
         if (puzzle.get(row + i, col + i) != null) {
           return false;
-        }
-      }
-    }
+        } // if
+      } // for
+    } // if-else
+
     return true;
-  }
+  } // lengthChecker
 
   /**
-   * fills the empty remaining squares of the wordsearch puzzle with random letters.
-   * @param puzzle the puzzle which, at this point, only contains the words.
+   * Fills the empty squares of the puzzle with random letters.
+   *
+   * @param puzzle the word search puzzle to fill.
    */
-
   public static void fillRandom(MatrixV0<Character> puzzle) {
     Random rand = new Random();
     for (int i = 0; i < puzzle.height(); i++) {
       for (int j = 0; j < puzzle.width(); j++) {
         if (puzzle.get(i, j) == null) {
-          char randomChar = (char) ('a' + rand.nextInt(26));
+          char randomChar = (char) ('a' + rand.nextInt(ALPHABET_SIZE));
           puzzle.set(i, j, randomChar);
-        }
-      }
-    }
-    return;
-  }
-/**
- * prints the word search puzzle.
- * @param puzzle the word search puzzle we want to print.
- */
+        } // if
+      } // for
+    } // for
+  } // fillRandom
+
+  /**
+   * Prints the word search puzzle.
+   *
+   * @param puzzle the word search puzzle to print.
+   */
   public static void print(MatrixV0<Character> puzzle) {
     for (int i = 0; i < puzzle.height(); i++) {
       for (int j = 0; j < puzzle.width(); j++) {
         System.out.print(puzzle.get(i, j) + " ");
-      }
+      } // for
       System.out.println();
-    }
-  }
-}
+    } // for
+  } // print
+} // WSUtils
+
