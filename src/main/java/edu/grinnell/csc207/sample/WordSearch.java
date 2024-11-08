@@ -8,7 +8,7 @@ import edu.grinnell.csc207.util.WSUtils;
 /**
  * A one-player game of word search.
  * This class generates a word search puzzle and allows the player to find words in it.
- * 
+ *
  * @author Sheilla Muligande
  * @author Princess Alexander
  */
@@ -16,10 +16,10 @@ public class WordSearch {
 
   /**
    * A sample one-player game. Intended as a potential
-   * use of our Matrix interface. 
+   * use of our Matrix interface.
    * Generates a word search puzzle and asks the player to find words.
-   * 
-   * @param args command line arguments. 
+   *
+   * @param args command line arguments.
    */
   public static void main(String[] args) {
     Scanner scnr = new Scanner(System.in);
@@ -43,16 +43,16 @@ public class WordSearch {
     WSUtils.print(puzzle, writer);
     writer.flush(); // Make sure everything is printed
 
-    WSGame(puzzle, words);
+    wsGame(puzzle, words);
   } // main
 
   /**
    * A sample one-player game that allows the user to search for words in a puzzle.
-   * 
+   *
    * @param puzzle the word search puzzle to be solved by the player.
    * @param words the list of words to be found.
    */
-  public static void WSGame(MatrixV0<Character> puzzle, String[] words) {
+  public static void wsGame(MatrixV0<Character> puzzle, String[] words) {
     Scanner scnr = new Scanner(System.in);
     String[] playerWords = new String[words.length];
     int playerScore = 0;
@@ -84,5 +84,5 @@ public class WordSearch {
         } // if
       } // for
     } // while
-  } // WSGame
+  } // wsGame
 } // WordSearch
