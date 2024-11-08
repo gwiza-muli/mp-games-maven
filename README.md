@@ -1,6 +1,6 @@
 # Abstract games
 
-A mini-project for Grinnell's CSC-207.
+A mini-project for Grinnell's CSC-207. wordsearch
 
 Authors:
 
@@ -10,7 +10,8 @@ Authors:
 
 Instructions:
 
-* **Please add instructions for running the game**
+* **for this game, you just need to enter a number between 1 and 7 for the number of words you want in your word search. then, you enter the word(s) you think you see
+    on the wordsearch until you find them all.*
 
 Acknowledgements:
 
