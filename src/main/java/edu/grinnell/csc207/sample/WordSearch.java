@@ -13,7 +13,7 @@ import edu.grinnell.csc207.util.WSUtils;
 public class WordSearch {
 
   /**
- * A sample one-player game (is that a puzzle?). Intended as a potential
+ * A sample one-player game. Intended as a potential
  * use of our Matrix interface.
  *
  * @param args command line arguments. 

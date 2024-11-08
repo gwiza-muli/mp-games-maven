@@ -3,13 +3,19 @@ package edu.grinnell.csc207.util;
 import java.util.Random;
 
 
-
+/**
+ * the util methods for the word search game.
+ * @author Sheilla Muligande
+ * @author Princess Alexander
+ */
 public class WSUtils {
   public static final int MAX_WORDS = 10;  // Maximum number of words in the puzzle
   public static final int WORD_LENGTH = 5; // Word length constraint
   public static final int MAX_ATTEMPTS = 100;  // Max number of attempts to find space for a word
   
-  // dictionary array
+  /**
+   * the array of words to add to our puzzle.
+   */
   public static String[] WORDS = {"hello", "this", "needs", "to", "grow", "hi", "good", "night"};
 
   /**
