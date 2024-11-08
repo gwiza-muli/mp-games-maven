@@ -31,41 +31,40 @@ public class MatrixV0<T> implements Matrix<T> {
   /**
    * Create a new matrix of the specified width and height with the given value as the default.
    *
-   * @param width The width of the matrix.
-   * @param height The height of the matrix.
+   * @param matrixWidth The width of the matrix.
+   * @param matrixHeight The height of the matrix.
    * @param def The default value, used to fill all the cells.
    *
    * @throws NegativeArraySizeException If either the width or height are negative.
    */
-  public MatrixV0(int width, int height, T def) {
-    this.width = width;
-    this.height = height;
+  public MatrixV0(int matrixWidth, int matrixHeight, T def) {
+    this.width = matrixWidth;
+    this.height = matrixHeight;
     this.defaultVal = def;
-    this.matrix = (T[][]) new Object[height][width];
+    this.matrix = (T[][]) new Object[matrixHeight][matrixWidth];
 
-    for (int h = 0; h < height; h++) {
-      for (int w = 0; w < width; w++) {
+    for (int h = 0; h < matrixHeight; h++) {
+      for (int w = 0; w < matrixWidth; w++) {
         matrix[h][w] = def;
       } //for
     } //for
-
   } // MatrixV0(int, int, T)
 
   /**
    * Create a new matrix of the specified width and height with null as the default value.
    *
-   * @param width The width of the matrix.
-   * @param height The height of the matrix.
+   * @param matrixWidth The width of the matrix.
+   * @param matrixHeight The height of the matrix.
    *
    * @throws NegativeArraySizeException If either the width or height are negative.
    */
-  public MatrixV0(int width, int height) {
-    this(width, height, null);
-    this.width = width;
-    this.height = height;
-    this.matrix = (T[][]) new Object[height][width];
-    for (int h = 0; h < height; h++) {
-      for (int w = 0; w < width; w++) {
+  public MatrixV0(int matrixWidth, int matrixHeight) {
+    this(matrixWidth, matrixHeight, null);
+    this.width = matrixWidth;
+    this.height = matrixHeight;
+    this.matrix = (T[][]) new Object[matrixHeight][matrixWidth];
+    for (int h = 0; h < matrixHeight; h++) {
+      for (int w = 0; w < matrixWidth; w++) {
         matrix[h][w] = null;
       } //for
     } //for
