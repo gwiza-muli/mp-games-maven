@@ -1,51 +1,57 @@
 package edu.grinnell.csc207.sample;
 
+import java.io.PrintWriter; // Import PrintWriter for output
 import java.util.Scanner;
 import edu.grinnell.csc207.util.MatrixV0;
 import edu.grinnell.csc207.util.WSUtils;
 
 /**
  * A one-player game of word search.
- *
+ * This class generates a word search puzzle and allows the player to find words in it.
+ * 
  * @author Sheilla Muligande
  * @author Princess Alexander
  */
 public class WordSearch {
 
   /**
- * A sample one-player game. Intended as a potential
- * use of our Matrix interface.
- *
- * @param args command line arguments. 
- */
+   * A sample one-player game. Intended as a potential
+   * use of our Matrix interface. 
+   * Generates a word search puzzle and asks the player to find words.
+   * 
+   * @param args command line arguments. 
+   */
   public static void main(String[] args) {
     Scanner scnr = new Scanner(System.in);
-    System.out.println("Wanna play word search? enter a number between 1 to 7 for the number of words.");
+    System.out.println("Wanna play word search? Enter a number between 1 to 7 for the number of words.");
 
     int wordCount = scnr.nextInt();
     while (wordCount < 1 || wordCount > 7) {
-      System.out.print("Wrong number of words! only enter between 1 and 7");
+      System.out.print("Wrong number of words! Only enter between 1 and 7.");
       wordCount = scnr.nextInt();
-    }
+    } // while
 
-    int puzzleDimensions = 7 + wordCount - 1; // MAKE SURE ALL WORDS ARE 7 OR FEWER // CHARACTERS!!!!!!!
+    int puzzleDimensions = 7 + wordCount - 1; // Ensure all words fit in the puzzle
     MatrixV0<Character> puzzle = new MatrixV0<>(puzzleDimensions, puzzleDimensions, null);
 
     String[] words = WSUtils.searchWords(wordCount);
-    WSUtils.WSpopulator(puzzle, words);
+    WSUtils.wsPopulator(puzzle, words);
     WSUtils.fillRandom(puzzle);
-    WSUtils.print(puzzle);
+
+    // Use PrintWriter to print the puzzle
+    PrintWriter writer = new PrintWriter(System.out);
+    WSUtils.print(puzzle, writer);
+    writer.flush(); // Make sure everything is printed
 
     WSGame(puzzle, words);
-  }
+  } // main
 
   /**
- * A sample one-player game (is that a puzzle?). Intended as a potential
- * use of our Matrix interface.
- *
- * @param puzzle the puzzle we use as our wordsearch.
- * @param words the words that the user will look for.
- */
+   * A sample one-player game that allows the user to search for words in a puzzle.
+   * 
+   * @param puzzle the word search puzzle to be solved by the player.
+   * @param words the list of words to be found.
+   */
   public static void WSGame(MatrixV0<Character> puzzle, String[] words) {
     Scanner scnr = new Scanner(System.in);
     String[] playerWords = new String[words.length];
@@ -55,43 +61,28 @@ public class WordSearch {
 
     while (true) {
       boolean wordInList = false;
-      
-      //WSUtils.print(puzzle);
+
+      // Prompt the user to enter a word or exit
       System.out.print("Enter word or 'exit'.\n");
       String userInput = scnr.nextLine().trim();
       if (userInput.equals("exit")) {
-        break;
-      }
+        break; // Exit the game if user inputs 'exit'
+      } // if
 
-      for (String word : words) {
+      for (String word : words) { // for each word in the list
         if (word.equals(userInput)) {
           boolean found = false;
-          for (int i = 0; i < playerScore; i++) {
+          for (int i = 0; i < playerScore; i++) { // check if the word was already found
             if (playerWords[i].equals(userInput)) {
               found = true;
-              break;
-            }
-          }
-          if (!found) {
-            playerWords[playerScore++] = userInput;
-            System.out.println("You're good at this.");
-            wordInList = true;
-            break;
-          }
-        }
-      }
-
-      if (!wordInList) {
-        System.out.println("already entered or not valid word");
-      }
-
-      if (playerScore == words.length) {
-        System.out.println("Word Search Completed!");
-        break;
-      }
-
-    }
-    scnr.close();
-  }
-
-}
+              break; // Break out of the loop if the word was found
+            } // if
+          } // for
+          if (!found) { // If word is not found in the player's list
+            playerWords[playerScore++] = userInput; // Add the word to the player's list
+          } // if
+        } // if
+      } // for
+    } // while
+  } // WSGame
+} // WordSearch
