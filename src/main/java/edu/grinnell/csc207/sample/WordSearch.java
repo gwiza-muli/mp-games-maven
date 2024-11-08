@@ -47,42 +47,63 @@ public class WordSearch {
   } // main
 
   /**
-   * A sample one-player game that allows the user to search for words in a puzzle.
-   *
-   * @param puzzle the word search puzzle to be solved by the player.
-   * @param words the list of words to be found.
-   */
+  * A sample one-player game that allows the user to search for words in a word search puzzle.
+  * The player enters words to find in the puzzle and receives feedback on whether the word
+  * is correct, already found, or not in the word list.
+  *
+  * @param puzzle the word search puzzle to be solved by the player.
+  * @param words the list of words to be found in the puzzle.
+  */
+
   public static void wsGame(MatrixV0<Character> puzzle, String[] words) {
     Scanner scnr = new Scanner(System.in);
-    String[] playerWords = new String[words.length];
-    int playerScore = 0;
+    String[] playerWords = new String[words.length]; // Array to track words found by the player
+    int playerScore = 0; // Keeps track of the number of correct words found
 
     System.out.println("PLEASE MAKE SURE TO ENTER ONLY lowercase WORDS!");
 
     while (true) {
-      boolean wordInList = false;
+      boolean wordInList = false; // Flag to check if the word entered is in the word list
 
-      // Prompt the user to enter a word or exit
+      // Prompt the user to enter a word or exit the game
       System.out.print("Enter word or 'exit'.\n");
       String userInput = scnr.nextLine().trim();
+
+      // Exit condition for the game if the player types 'exit'
       if (userInput.equals("exit")) {
-        break; // Exit the game if user inputs 'exit'
+        break; // Exit the game loop
       } // if
 
-      for (String word : words) { // for each word in the list
-        if (word.equals(userInput)) {
-          boolean found = false;
-          for (int i = 0; i < playerScore; i++) { // check if the word was already found
-            if (playerWords[i].equals(userInput)) {
-              found = true;
-              break; // Break out of the loop if the word was found
+      // Check if the word entered by the user is part of the words list
+      for (String word : words) { // Loop through each word in the words list
+        if (word.equals(userInput)) { // If the word matches an entry in the word list
+          wordInList = true; // Set the flag to true indicating the word is valid
+          boolean found = false; // Flag to check if the word has already been found
+
+          // Check if the word was already found by the player
+          for (int i = 0; i < playerScore; i++) {
+            if (playerWords[i].equals(userInput)) { // If the word was already found
+              found = true; // Set the flag to true
+              break; // Exit the loop as the word has been found before
             } // if
           } // for
-          if (!found) { // If word is not found in the player's list
-            playerWords[playerScore++] = userInput; // Add the word to the player's list
-          } // if
+
+          // If the word was not found before, add it to the list of found words
+          if (!found) {
+            playerWords[playerScore++] = userInput; // Add the word to playerWords[] and increment score
+            System.out.println("Correct! Keep going!"); // Inform the player they guessed correctly
+          } else {
+            System.out.println("You already found that word!"); // tell user word was found
+          } // if-else
+
+          break; // Exit the loop after processing a valid word
         } // if
       } // for
+
+      // If the word wasn't found in the list, inform the player
+      if (!wordInList) {
+        System.out.println("That word is not in the word search! Try again."); // Invalid word feedback
+      } // if
     } // while
   } // wsGame
 } // WordSearch

@@ -34,7 +34,7 @@ public class WSUtils {
   /**
    * Array of words to add to the word search puzzle.
    */
-  private static String[] wordsList = {"hello", "this", "needs", "to", "grow", "hi", "good", "night"};
+  public static String[] wordsList = {"hello", "this", "needs", "to", "grow", "hi", "good", "night"};
 
   /**
    * Selects words randomly from the wordsList array to be used in the word search.
@@ -163,20 +163,6 @@ public class WSUtils {
       } // for
     } // for
   } // fillRandom
-
-  // /**
-  //  * Prints the word search puzzle.
-  //  *
-  //  * @param puzzle the word search puzzle to print.
-  //  */
-  // public static void print(MatrixV0<Character> puzzle) {
-  //   for (int i = 0; i < puzzle.height(); i++) {
-  //     for (int j = 0; j < puzzle.width(); j++) {
-  //       System.out.println(puzzle.get(i, j) + " ");
-  //     } // for
-  //     System.out.println();
-  //   } // for
-  // } // print
 
   /**
    * Prints the word search puzzle using PrintWriter.
