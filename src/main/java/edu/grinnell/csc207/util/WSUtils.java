@@ -2,32 +2,41 @@ package edu.grinnell.csc207.util;
 
 import java.util.Random;
 
-public class WSUtils {
 
+
+public class WSUtils {
+  public static final int MAX_WORDS = 10;  // Maximum number of words in the puzzle
+  public static final int WORD_LENGTH = 5; // Word length constraint
+  public static final int MAX_ATTEMPTS = 100;  // Max number of attempts to find space for a word
+  
   // dictionary array
    public static String[] WORDS = {"hello", "this", "needs", "to", "grow", "hi", "good", "night"};
 
-  public static String[] searchWords(int wordCount) {
+   public static String[] searchWords(int wordCount) {
+    // Ensure wordCount doesn't exceed MAX_WORDS
+    if (wordCount > MAX_WORDS) {
+        throw new IllegalArgumentException("Word count exceeds the maximum limit.");
+    }
     String[] WSWords = new String[wordCount];
     Random rand = new Random();
     int words = 0;
 
     while (words < wordCount) {
-      String word = WORDS[rand.nextInt(WORDS.length)];
-      boolean dup = false;
-      for (int i = 0; i < words; i++) {
-        if (WSWords[i].equals(word)) {
-          dup = true;
+        String word = WORDS[rand.nextInt(WORDS.length)];
+        boolean dup = false;
+        for (int i = 0; i < words; i++) {
+            if (WSWords[i].equals(word)) {
+                dup = true;
+            }
         }
-      }
-      if (dup == false) {
-        WSWords[words] = word;
-        words++;
-      }
-
+        if (!dup) {
+            WSWords[words] = word;
+            words++;
+        }
     }
     return WSWords;
-  }
+}
+
 
 
   public static void WSpopulator(MatrixV0<Character> puzzle, String[] words) {
