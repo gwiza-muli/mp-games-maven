@@ -34,7 +34,7 @@ public class WSUtils {
   /**
    * Array of words to add to the word search puzzle.
    */
-  public static String[] wordsList = {"hello", "this", "needs", "to", "grow", "hi", "good", "night"};
+  private static String[] wordsList = {"hello", "this", "needs", "to", "grow", "hi", "good", "night"};
 
   /**
    * Selects words randomly from the wordsList array to be used in the word search.

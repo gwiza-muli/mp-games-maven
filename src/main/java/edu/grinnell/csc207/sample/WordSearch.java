@@ -23,7 +23,7 @@ public class WordSearch {
    */
   public static void main(String[] args) {
     Scanner scnr = new Scanner(System.in);
-    System.out.println("Wanna play word search? Enter a number between 1 to 7 for the number of words.");
+    System.out.print("Wanna play word search? Enter a number between 1 to 7 for the # of words.");
 
     int wordCount = scnr.nextInt();
     while (wordCount < 1 || wordCount > 7) {
@@ -54,13 +54,12 @@ public class WordSearch {
   * @param puzzle the word search puzzle to be solved by the player.
   * @param words the list of words to be found in the puzzle.
   */
-
   public static void wsGame(MatrixV0<Character> puzzle, String[] words) {
     Scanner scnr = new Scanner(System.in);
     String[] playerWords = new String[words.length]; // Array to track words found by the player
     int playerScore = 0; // Keeps track of the number of correct words found
 
-    System.out.println("PLEASE MAKE SURE TO ENTER ONLY lowercase WORDS!");
+    System.out.print("PLEASE MAKE SURE TO ENTER ONLY lowercase WORDS!");
 
     while (true) {
       boolean wordInList = false; // Flag to check if the word entered is in the word list
@@ -90,11 +89,17 @@ public class WordSearch {
 
           // If the word was not found before, add it to the list of found words
           if (!found) {
-            playerWords[playerScore++] = userInput; // Add the word to playerWords[] and increment score
-            System.out.println("Correct! Keep going!"); // Inform the player they guessed correctly
+            playerWords[playerScore++] = userInput; // Add the word and increment score
+            System.out.print("Correct! Keep going!"); // Inform the player they guessed correctly
           } else {
-            System.out.println("You already found that word!"); // tell user word was found
+            System.out.print("You already found that word!"); // tell user word was found
           } // if-else
+
+          // Check if all words have been found
+          if (playerScore == words.length) {
+            System.out.print("Congratulations! You've found all the words!");
+            break; // Exit the game loop if all words are found
+          } // if
 
           break; // Exit the loop after processing a valid word
         } // if
@@ -102,7 +107,7 @@ public class WordSearch {
 
       // If the word wasn't found in the list, inform the player
       if (!wordInList) {
-        System.out.println("That word is not in the word search! Try again."); // Invalid word feedback
+        System.out.print("That word is not in the word search! Try again.");
       } // if
     } // while
   } // wsGame
