@@ -91,17 +91,14 @@ public class WordSearch {
           if (!found) {
             playerWords[playerScore++] = userInput; // Add the word and increment score
              // Check if all words have been found
-          if (playerScore == words.length) {
-            System.out.println("Congratulations! You've found all the words!\n");
-            return; // Exit the game loop if all words are found
-          } // if
+            if (playerScore == words.length) {
+              System.out.print("Congratulations! You've found all the words!\n");
+              return; // Exit the game loop if all words are found
+            } // if
             System.out.print("Correct! Keep going!"); // Inform the player they guessed correctly
           } else {
-            System.out.print("You already found that word!"); // tell user word was found
+            System.out.print("You already found that word!"); //tell user word was found
           } // if-else
-
-         
-
           break; // Exit the loop after processing a valid word
         } // if
       } // for
