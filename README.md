@@ -13,7 +13,7 @@ Instructions:
 * **for this game, you just need to enter a number between 1 and 7 for the number of words you want in your word search. then, you enter the word(s) you think you see
     on the wordsearch until you find them all.*
 
-Acknowledgements:
+Acknowledgements: Princess's tutor Hoang Mai helped with brainstorming on white board outline of project conceptually and helping to decide if project was doable in time span adn limitations
 
 Source:
 
