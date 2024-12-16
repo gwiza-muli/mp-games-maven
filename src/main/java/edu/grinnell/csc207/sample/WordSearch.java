@@ -90,16 +90,17 @@ public class WordSearch {
           // If the word was not found before, add it to the list of found words
           if (!found) {
             playerWords[playerScore++] = userInput; // Add the word and increment score
+             // Check if all words have been found
+          if (playerScore == words.length) {
+            System.out.println("Congratulations! You've found all the words!\n");
+            return; // Exit the game loop if all words are found
+          } // if
             System.out.print("Correct! Keep going!"); // Inform the player they guessed correctly
           } else {
             System.out.print("You already found that word!"); // tell user word was found
           } // if-else
 
-          // Check if all words have been found
-          if (playerScore == words.length) {
-            System.out.print("Congratulations! You've found all the words!\n");
-            break; // Exit the game loop if all words are found
-          } // if
+         
 
           break; // Exit the loop after processing a valid word
         } // if
